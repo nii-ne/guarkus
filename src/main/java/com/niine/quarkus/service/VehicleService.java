@@ -1,10 +1,10 @@
 package com.niine.quarkus.service;
 
+import com.niine.quarkus.exception.DataNotFoundException;
 import com.niine.quarkus.model.entities.Vehicle;
 import com.niine.quarkus.model.request.VehicleRequest;
 import com.niine.quarkus.repositories.VehicleRepository;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 import javax.enterprise.context.ApplicationScoped;
@@ -45,6 +45,6 @@ public class VehicleService {
             if(null != brand && !brand.isBlank())  vehicle.setBrand(brand);
             return vehicleRepository.save(vehicle);
         }
-        throw new IllegalArgumentException("No Vehicle with id " + id + " exists");
+        throw new DataNotFoundException("No Vehicle with id " + id + " exists");
     }
 }

@@ -18,6 +18,11 @@ public class CommonResponse<T> {
         this.message = message;
     }
 
+    public CommonResponse() {
+        this.code = "200-000";
+        this.message = "Success";
+    }
+
     public T getData() {
         return data;
     }

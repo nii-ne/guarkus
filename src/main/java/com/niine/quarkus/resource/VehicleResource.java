@@ -1,5 +1,6 @@
 package com.niine.quarkus.resource;
 
+import com.niine.quarkus.exception.ValidateException;
 import com.niine.quarkus.model.entities.Vehicle;
 import com.niine.quarkus.model.request.VehicleRequest;
 import com.niine.quarkus.model.response.CommonResponse;
@@ -74,7 +75,7 @@ public class VehicleResource {
         Set<ConstraintViolation<VehicleRequest>> violations = validator.validate(vehicle);
         if (!violations.isEmpty()) {
             String message = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(","));
-            return new CommonResponse<>("400-000", message);
+            throw new ValidateException(message);
         }
         return new CommonResponse<>("200-000", "Success", vehicleService.updateVehicle(id, vehicle.getColor(), vehicle.getBrand()));
     }
