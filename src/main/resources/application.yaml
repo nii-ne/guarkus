@@ -1,0 +1,4 @@
+greeting:
+  message: hello
+  name: quarkus
+  others: xxx
