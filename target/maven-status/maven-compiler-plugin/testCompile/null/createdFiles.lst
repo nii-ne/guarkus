@@ -1,3 +1,3 @@
 META-INF/panache-archive.marker
-com/niine/quarkus/resource/GreetingResourceTest.class
 com/niine/quarkus/resource/GreetingResourceIT.class
+com/niine/quarkus/resource/GreetingResourceTest.class
