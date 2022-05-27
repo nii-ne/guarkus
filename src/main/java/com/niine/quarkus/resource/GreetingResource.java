@@ -5,6 +5,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.jboss.resteasy.reactive.RestHeader;
 
 @Path("/hello")
 public class GreetingResource {
@@ -43,7 +44,8 @@ public class GreetingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/{name}")
-    public String hello(String name) {
+    public String hello(@RestHeader("X-Correlation-Id") String correlationId, String name) {
+        System.out.println("Correlation ID: " + correlationId);
         return greetingService.greeting(name);
     }
 
