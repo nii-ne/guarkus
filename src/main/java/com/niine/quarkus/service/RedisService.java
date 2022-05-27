@@ -1,15 +1,13 @@
 package com.niine.quarkus.service;
 
+import io.quarkus.redis.client.RedisClient;
 import io.quarkus.redis.client.reactive.ReactiveRedisClient;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.redis.client.Response;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.inject.Singleton;
-
-import io.quarkus.redis.client.RedisClient;
 
 @Singleton
 public class RedisService {
@@ -45,8 +43,8 @@ public class RedisService {
                     return result;
                 });
     }
-    public Uni<Void> del(String key) {
-         return reactiveRedisClient.del(List.of(key)).map(Response -> null);
+    public io.vertx.redis.client.Response del(String key) {
+        return redisClient.del(List.of(key));
     }
 
 }

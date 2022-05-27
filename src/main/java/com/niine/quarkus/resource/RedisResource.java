@@ -60,7 +60,7 @@ public class RedisResource {
     @Path("/{key}")
     @Produces(MediaType.TEXT_PLAIN)
     @ResponseStatus(RestResponse.StatusCode.OK)
-    public Uni<Void> delete(@PathParam("key") String key) {
+    public Response delete(@PathParam("key") String key) {
         return redisService.del(key);
     }
 }
