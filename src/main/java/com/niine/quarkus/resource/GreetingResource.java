@@ -1,10 +1,14 @@
 package com.niine.quarkus.resource;
 
-import com.niine.quarkus.service.GreetingService;
+import com.niine.quarkus.service.GreetingService;;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.jboss.resteasy.reactive.RestHeader;
 
 @Path("/hello")
 public class GreetingResource {
@@ -14,7 +18,6 @@ public class GreetingResource {
      * @Inject
      * GreetingService greetingService;
      */
-
 
     /**
      * Constructor Injection
@@ -42,8 +45,11 @@ public class GreetingResource {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{name}")
-    public String hello(String name) {
+    public String hello(String name, @RestHeader("X-Correlation-Id") String correlationId) {
+        System.out.println("CorrelationId: " + correlationId);
+        System.out.println("Hello " + name);
         return greetingService.greeting(name);
     }
 
